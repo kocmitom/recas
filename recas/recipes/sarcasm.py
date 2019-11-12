@@ -33,13 +33,15 @@ class iSarcasm(recipe.Recipe):
         for il in tsv[1:]:
             tweet_id = int(il[0])
             if tweet_id not in tweets:
-                print("{} tweet deleted".format(tweet_id))
                 deleted += 1
                 continue
             line = il + [tweets[tweet_id]]
             final.append(line)
         
-        print("Total deleted tweets {}".format(deleted))
         bash_helper.write_tsv(final, self.corpus_folder, "final.tsv")
+
+        if deleted>0:
+            print("Missing {} deleted tweets".format(deleted)) 
+            bash_helper.write_text("Missing {} deleted tweets".format(deleted), self.corpus_folder, "README")
 
 

@@ -36,3 +36,8 @@ def write_tsv(list_to_store, corpus_dir, file_name):
         tsv_output = csv.writer(f_output, delimiter='\t')
         for row in list_to_store:
             tsv_output.writerow(row)
+
+def write_text(text, corpus_dir, file_name):
+    target_file = os.path.join("corpora", corpus_dir, file_name)
+    with open(target_file, 'w') as f_output:
+        f_output.write(text)
